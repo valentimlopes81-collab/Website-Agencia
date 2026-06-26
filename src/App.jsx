@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import {
   Menu, X, ArrowRight, Code, Zap, Smartphone, Search, Rocket, CheckCircle,
   Phone, Eye, Star, Calendar, Monitor, Camera, Compass,
-  MousePointerClick, Palette, Headphones, ChevronLeft, ChevronRight, Quote
+  MousePointerClick, Palette, Headphones, ChevronLeft, ChevronRight, ChevronDown, Quote
 } from 'lucide-react';
 
-/* ── ESTILOS GLOBAIS E ANIMAÇÕES PREMIUM ────────────────────── */
+/* ── ESTILOS GLOBAIS E ANIMAÇÕES PREMIUM ─────────────────────── */
 const GlobalStyles = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
@@ -108,6 +108,8 @@ const TEAM = [
 
 /* ── MODAL "VAMOS CONSTRUIR O SEU WEBSITE" ──────────────────── */
 const ContactModal = ({ open, onClose }) => {
+  const [hasWebsite, setHasWebsite] = useState(null);
+
   if (!open) return null;
 
   return (
@@ -157,9 +159,64 @@ const ContactModal = ({ open, onClose }) => {
             <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Fale-nos do seu projeto</label>
             <textarea rows="3" placeholder="Descreva o seu negócio, o que precisa que o site faça, ideias que tenha, etc." className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all resize-none" required></textarea>
           </div>
+
+          <div className="space-y-3">
+            <label className="text-sm font-bold text-white">
+              Já tem um website atual? <span className="text-red-500">*</span>
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setHasWebsite('sim')}
+                className={`py-3 rounded-xl border font-semibold transition-all ${
+                  hasWebsite === 'sim'
+                    ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                    : 'border-white/15 text-gray-400 hover:border-white/30'
+                }`}
+              >
+                Sim
+              </button>
+              <button
+                type="button"
+                onClick={() => setHasWebsite('nao')}
+                className={`py-3 rounded-xl border font-semibold transition-all ${
+                  hasWebsite === 'nao'
+                    ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                    : 'border-white/15 text-gray-400 hover:border-white/30'
+                }`}
+              >
+                Não
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <label className="text-sm font-bold text-white">
+              Orçamento do Projeto <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <select
+                defaultValue=""
+                required
+                className="w-full px-4 py-3 rounded-xl border border-blue-500 bg-transparent text-white focus:ring-0 outline-none transition-all appearance-none cursor-pointer shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+              >
+                <option value="" disabled className="bg-black text-gray-400">Selecione o seu orçamento</option>
+                <option value="<500" className="bg-black text-white">Menos de 500€</option>
+                <option value="500-1500" className="bg-black text-white">500€ - 1.500€</option>
+                <option value="1500-3000" className="bg-black text-white">1.500€ - 3.000€</option>
+                <option value=">3000" className="bg-black text-white">Mais de 3.000€</option>
+              </select>
+              <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            </div>
+          </div>
+
           <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-full font-bold text-base hover:bg-blue-600 transition-all duration-500 hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
             Enviar Mensagem <ArrowRight size={18} />
           </button>
+
+          <p className="text-center text-gray-500 text-sm">
+            Sem necessidade de pagamento. Entraremos em contacto em menos de 24 horas.
+          </p>
         </form>
       </div>
     </div>
