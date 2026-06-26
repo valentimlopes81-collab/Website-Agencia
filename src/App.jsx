@@ -562,19 +562,40 @@ export default function AgencyPortfolio() {
         </div>
       </section>
 
-   {/* ── SECÇÃO: TESTEMUNHOS (CARROSSEL HORIZONTAL) ── */}
+ {/* ── SECÇÃO: TESTEMUNHOS (CARROSSEL COM SETAS NO PC) ── */}
 <section id="testimonials" className="py-24 md:py-32 px-6 bg-black border-t border-white/5 overflow-hidden">
   <div className="max-w-7xl mx-auto relative">
-    <div className="text-center mb-16 animate-fade-up">
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
-        What My <span className="text-blue-500 text-glow-blue">Clients</span> Are Saying
-      </h2>
+    
+    {/* Cabeçalho + Setas (Setas visíveis apenas em PC: md:flex) */}
+    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 animate-fade-up gap-8">
+      <div className="text-center md:text-left">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
+          What My <span className="text-blue-500 text-glow-blue">Clients</span> Are Saying
+        </h2>
+      </div>
+      
+      {/* Setas de navegação */}
+      <div className="hidden md:flex items-center gap-3">
+        <button 
+          onClick={() => scrollCarousel('left')}
+          className="p-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"
+          aria-label="Deslizar para a esquerda"
+        >
+          <ChevronLeft size={22} />
+        </button>
+        <button 
+          onClick={() => scrollCarousel('right')}
+          className="p-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"
+          aria-label="Deslizar para a direita"
+        >
+          <ChevronRight size={22} />
+        </button>
+      </div>
     </div>
 
     {/* Contentor do Carrossel */}
     <div className="relative w-full">
-      
-      {/* Efeito de desvanecimento à direita para indicar claramente que há mais conteúdo */}
+      {/* Efeito de desvanecimento à direita para indicar mais conteúdo */}
       <div className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
 
       {/* Esconder a barra de scroll nativa com CSS inline */}
@@ -583,11 +604,13 @@ export default function AgencyPortfolio() {
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <div className="hide-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2 cursor-grab active:cursor-grabbing">
+      <div 
+        ref={carouselRef}
+        className="hide-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2 cursor-grab active:cursor-grabbing scroll-smooth"
+      >
         {TESTIMONIALS.map((item, idx) => (
           <div 
             key={idx} 
-            // A largura fixa (w-[85vw] no mobile, w-[400px] em ecrãs maiores) garante que o próximo cartão fica cortado, indicando scroll
             className="snap-start shrink-0 w-[85vw] md:w-[400px] bg-[#0d0d0d] rounded-2xl border border-white/5 p-8 flex flex-col relative transition-all duration-300 hover:border-blue-500/30 group"
           >
             {/* Ícone de Aspas e Estrelas */}
@@ -624,7 +647,6 @@ export default function AgencyPortfolio() {
     </div>
   </div>
 </section>
-
       {/* ── A EQUIPA ── */}
       <section id="team" className="py-24 md:py-32 px-6 bg-[#0a0a0a] border-t border-white/5 overflow-hidden">
         <div className="max-w-4xl mx-auto relative">
