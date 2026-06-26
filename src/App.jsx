@@ -106,6 +106,15 @@ const TEAM = [
   }
 ];
 
+const TESTIMONIALS = [
+  { name: "Vida Cafe", text: "The site feels warm and premium, and our online orders jumped immediately. Jack organized everything so customers find the menu and location fast." },
+  { name: "Vines Hair Studio", text: "Jack nailed the look and kept the booking flow simple. The team page and service layout have been a huge upgrade for us." },
+  { name: "Vines33", text: "Our product brand finally has a site that feels legit. The visuals, layout, and CTA flow are exactly what we needed to convert." },
+  { name: "Ponch Blendz", text: "Fast turnaround and clean design. The site looks modern and customers can find our booking info instantly." },
+  { name: "Tandy's Window Services", text: "Our new website finally matches the quality of our work. It brought in more quote requests within the first week." },
+  { name: "CE Jewelry", text: "The site feels luxury without being overdone. Customers stay longer and the product pages are easy to browse." }
+];
+
 const BUDGET_OPTIONS = [
   { value: "<500", label: "Menos de 500€" },
   { value: "500-1500", label: "500€ - 1.500€" },
@@ -554,6 +563,52 @@ export default function AgencyPortfolio() {
           </div>
         </div>
       </section>
+
+      {/* ── SECÇÃO: TESTEMUNHOS ── */}
+<section id="testimonials" className="py-24 md:py-32 px-6 bg-black border-t border-white/5">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16 animate-fade-up">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
+        What My <span className="text-blue-500 text-glow-blue">Clients</span> Are Saying
+      </h2>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {TESTIMONIALS.map((item, idx) => (
+        <div key={idx} className="bg-[#0d0d0d] rounded-2xl border border-white/5 p-8 flex flex-col relative transition-all duration-300 hover:border-blue-500/30 group">
+          {/* Ícone de Aspas e Estrelas */}
+          <div className="flex justify-between items-start mb-6">
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Star key={s} size={16} fill="#3b82f6" className="text-blue-500" />
+              ))}
+            </div>
+            <Quote size={24} className="text-blue-500/20 group-hover:text-blue-500 transition-colors duration-300" />
+          </div>
+
+          {/* Texto do Testemunho */}
+          <p className="text-gray-300 text-[15px] leading-relaxed font-light mb-8 flex-1">
+            "{item.text}"
+          </p>
+
+          {/* Linha divisória subtil */}
+          <div className="border-t border-white/5 pt-4">
+            <h4 className="text-white font-display font-bold text-sm tracking-wide">
+              {item.name}
+            </h4>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Botão See More Testimonials */}
+    <div className="flex justify-center mt-12">
+      <button className="px-8 py-3 bg-transparent hover:bg-white/5 text-gray-300 hover:text-white border border-white/10 rounded-full font-medium text-sm transition-all duration-300">
+        See More Testimonials
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* ── A EQUIPA ── */}
       <section id="team" className="py-24 md:py-32 px-6 bg-[#0a0a0a] border-t border-white/5 overflow-hidden">
