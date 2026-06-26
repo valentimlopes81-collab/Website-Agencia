@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
-  Menu, X, ArrowRight, Code, Zap, Smartphone, Search, Rocket, CheckCircle,
+  Menu, X, ArrowRight, Zap, Search, Rocket, CheckCircle,
   Phone, Eye, Star, Calendar, Monitor, Camera, Compass,
   MousePointerClick, Palette, Headphones, ChevronLeft, ChevronRight, ChevronDown, Quote
 } from 'lucide-react';
@@ -95,13 +95,13 @@ const TEAM = [
   {
     name: "Afonso",
     role: "Co-Fundador, Diretor Criativo & Audiovisual",
-    image: "/afonso.png", 
+    image: "/afonso.webp",
     bio: "Ex-estudante de Arquitetura, sou Designer Gráfico, Web Designer e fundador de uma marca de roupa própria, projeto onde levei a criatividade ao limite ao organizar e produzir um evento para 950 pessoas. Esta experiência no 'terreno' deu-me a visão 360° necessária para entender o que realmente atrai e retém um público.\n\nTrago para a agência o equilíbrio entre a estética rigorosa e a estratégia que atrai clientes. Como fotógrafo e videógrafo freelance, asseguro pessoalmente toda a produção e pós-produção de conteúdos, garantindo que cada projeto tenha um acabamento premium e inovador."
   },
   {
     name: "Valentim",
     role: "Co-Fundador, Estratégia & Lead Developer",
-    image: "/valentim.png", 
+    image: "/valentim.webp",
     bio: "Sou o Valentim, estudante de Economia no ISEG e apaixonado por inovação e tecnologia. Com uma forte veia empreendedora, desenvolvi um projeto de impacto focado numa cadeira de rodas híbrida que me permitiu ganhar perspetiva internacional e contactar com mercados em vários países. Em paralelo à estratégia económica, especializei-me no desenvolvimento web através de código, criando plataformas rápidas, otimizadas e focadas na experiência do utilizador.\n\nAtualmente, aplico esta visão analítica e competências técnicas na agência, ajudando negócios a traduzirem os seus objetivos em soluções digitais de alto impacto."
   }
 ];
