@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Menu, X, ArrowRight, Code, Zap, Smartphone, Search, Rocket, CheckCircle, 
-  Mail, MapPin, Phone, Eye, Star, Calendar, Monitor, Camera, Compass, 
-  MousePointerClick, Palette, Headphones, ChevronLeft, ChevronRight, Quote
+import { useState, useEffect, useRef } from 'react';
+import {
+  Menu, X, ArrowRight, Zap, Search, Rocket, CheckCircle,
+  Phone, Eye, Star, Calendar, Monitor, Camera, Compass,
+  MousePointerClick, Palette, Headphones, ChevronLeft, ChevronRight, ChevronDown, Quote
 } from 'lucide-react';
 
-/* ── ESTILOS GLOBAIS E ANIMAÇÕES PREMIUM ────────────────────── */
+/* ── ESTILOS GLOBAIS E ANIMAÇÕES PREMIUM ─────────────────────── */
 const GlobalStyles = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
@@ -75,12 +75,12 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { id: 1, title: "Clínica Médica Premium", category: "Web Design Institucional", desc: "Website institucional de alta conversão com sistema de marcações online e presença no Google otimizada.", url: "#", img: "https://images.unsplash.com/photo-1538108149393-cebb47acddb2?w=800&q=80" },
-  { id: 2, title: "Loja de Moda Sustentável", category: "E-commerce Otimizado", desc: "Loja online completa com catálogo de produtos, pagamentos integrados e design minimalista de luxo.", url: "#", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" },
-  { id: 3, title: "App de Fitness (SaaS)", category: "Landing Page de Conversão", desc: "Página de alto impacto desenhada para converter visitantes em subscritores com funil otimizado.", url: "#", img: "https://images.unsplash.com/photo-1526506118432-bc14c4f30dc1?w=800&q=80" },
-  { id: 4, title: "Estúdio de Arquitetura", category: "Portefólio Minimalista", desc: "Portefólio elegante que destaca projetos de arquitetura com galeria imersiva e formulário de contacto.", url: "#", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" },
-  { id: 5, title: "Restaurante Gourmet", category: "Web Design & Reservas", desc: "Presença digital premium com menu interativo, sistema de reservas e integração com Google Maps.", url: "#", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" },
-  { id: 6, title: "Escritório de Advogados", category: "Site Institucional", desc: "Website de autoridade para estúdio jurídico com área de especialidades, equipa e formulário de consulta.", url: "#", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" },
+  { id: 1, title: "Villa Aurora", category: "Alojamento de Luxo & Reservas", desc: "Site de apresentação para um alojamento privado de luxo em Malta, com galeria imersiva, quartos, comodidades, avaliações e sistema de reserva direta.", url: "https://villa-silk.vercel.app/", img: "/villa.webp" },
+  { id: 2, title: "Óptica 13", category: "E-commerce & Serviços Óticos", desc: "Website para óptica com agendamento de exames de optometria gratuitos, catálogo de marcas premium e quiz de estilo interativo.", url: "https://optica13.shop/", img: "/optica13.webp" },
+  { id: 3, title: "Willchair", category: "Landing Page de Startup", desc: "Página de apresentação de um projeto de empreendedorismo: um kit modular híbrido-elétrico que transforma qualquer cadeira de rodas manual numa elétrica, a uma fração do custo do mercado.", url: "https://willchair.vercel.app/", img: "/willchair.webp" },
+  { id: 4, title: "Cenawrld", category: "E-commerce de Moda & Streetwear", desc: "Loja online de streetwear urbano com identidade visual forte, coleções para homem e mulher e checkout otimizado.", url: "https://cenawrld.com/", img: "/cenawrld.webp" },
+  { id: 5, title: "Corte & Calma", category: "Marcações Online — Barbearia", desc: "Website para barbearia em Lisboa com sistema de reservas, apresentação de packs, equipa e contacto direto por WhatsApp.", url: "https://corte-e-calma-1.vercel.app/", img: "/corte-e-calma.webp" },
+  { id: 6, title: "Lumina", category: "Clínica de Estética & Beleza", desc: "Website para clínica de tratamentos estéticos no Chiado, com marcação de consultas, lista de preços e prova social com centenas de avaliações.", url: "https://lumina-sigma-weld.vercel.app/", img: "/lumina.webp" },
 ];
 
 const PROCESS = [
@@ -95,22 +95,190 @@ const TEAM = [
   {
     name: "Afonso",
     role: "Co-Fundador, Diretor Criativo & Audiovisual",
-    image: "/afonso.png", 
+    image: "/afonso.webp",
     bio: "Ex-estudante de Arquitetura, sou Designer Gráfico, Web Designer e fundador de uma marca de roupa própria, projeto onde levei a criatividade ao limite ao organizar e produzir um evento para 950 pessoas. Esta experiência no 'terreno' deu-me a visão 360° necessária para entender o que realmente atrai e retém um público.\n\nTrago para a agência o equilíbrio entre a estética rigorosa e a estratégia que atrai clientes. Como fotógrafo e videógrafo freelance, asseguro pessoalmente toda a produção e pós-produção de conteúdos, garantindo que cada projeto tenha um acabamento premium e inovador."
   },
   {
     name: "Valentim",
     role: "Co-Fundador, Estratégia & Lead Developer",
-    image: "/valentim.png", 
+    image: "/valentim.webp",
     bio: "Sou o Valentim, estudante de Economia no ISEG e apaixonado por inovação e tecnologia. Com uma forte veia empreendedora, desenvolvi um projeto de impacto focado numa cadeira de rodas híbrida que me permitiu ganhar perspetiva internacional e contactar com mercados em vários países. Em paralelo à estratégia económica, especializei-me no desenvolvimento web através de código, criando plataformas rápidas, otimizadas e focadas na experiência do utilizador.\n\nAtualmente, aplico esta visão analítica e competências técnicas na agência, ajudando negócios a traduzirem os seus objetivos em soluções digitais de alto impacto."
   }
 ];
+
+const BUDGET_OPTIONS = [
+  { value: "<500", label: "Menos de 500€" },
+  { value: "500-1500", label: "500€ - 1.500€" },
+  { value: "1500-3000", label: "1.500€ - 3.000€" },
+  { value: ">3000", label: "Mais de 3.000€" },
+];
+
+/* ── DROPDOWN CUSTOMIZADO ──────────────────────────────────── */
+const CustomSelect = ({ options, value, onChange, placeholder }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selected = options.find((o) => o.value === value);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-blue-500 bg-transparent text-left transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+      >
+        <span className={selected ? "text-white" : "text-gray-500"}>
+          {selected ? selected.label : placeholder}
+        </span>
+        <ChevronDown size={18} className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute z-20 mt-2 w-full bg-[#111] border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-fade-up" style={{ animationDuration: '0.2s' }}>
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => { onChange(opt.value); setIsOpen(false); }}
+              className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                value === opt.value
+                  ? 'bg-blue-500/10 text-blue-500'
+                  : 'text-gray-300 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ── MODAL "VAMOS CONSTRUIR O SEU WEBSITE" ──────────────────── */
+const ContactModal = ({ open, onClose }) => {
+  const [hasWebsite, setHasWebsite] = useState(null);
+  const [budget, setBudget] = useState(null);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-white/10 rounded-3xl shadow-2xl p-8 md:p-10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
+          aria-label="Fechar"
+        >
+          <X size={24} />
+        </button>
+
+        <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+          Vamos Construir o Seu Website
+        </h2>
+        <p className="text-gray-400 font-light mb-8">
+          Formulário rápido. Respondemos em menos de 24 horas.
+        </p>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onClose();
+          }}
+          className="space-y-6"
+        >
+          <div className="space-y-2">
+            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Nome Completo</label>
+            <input type="text" placeholder="João Silva" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Email</label>
+            <input type="email" placeholder="joao@empresa.com" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Número de Telefone</label>
+            <input type="tel" placeholder="+351 912 345 678" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Fale-nos do seu projeto</label>
+            <textarea rows="3" placeholder="Descreva o seu negócio, o que precisa que o site faça, ideias que tenha, etc." className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all resize-none" required></textarea>
+          </div>
+
+          <div className="space-y-3">
+            <label className="text-sm font-bold text-white">
+              Já tem um website atual? <span className="text-red-500">*</span>
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setHasWebsite('sim')}
+                className={`py-3 rounded-xl border font-semibold transition-all ${
+                  hasWebsite === 'sim'
+                    ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                    : 'border-white/15 text-gray-400 hover:border-white/30'
+                }`}
+              >
+                Sim
+              </button>
+              <button
+                type="button"
+                onClick={() => setHasWebsite('nao')}
+                className={`py-3 rounded-xl border font-semibold transition-all ${
+                  hasWebsite === 'nao'
+                    ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                    : 'border-white/15 text-gray-400 hover:border-white/30'
+                }`}
+              >
+                Não
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <label className="text-sm font-bold text-white">
+              Orçamento do Projeto <span className="text-red-500">*</span>
+            </label>
+            <CustomSelect
+              options={BUDGET_OPTIONS}
+              value={budget}
+              onChange={setBudget}
+              placeholder="Selecione o seu orçamento"
+            />
+          </div>
+
+          <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-full font-bold text-base hover:bg-blue-600 transition-all duration-500 hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+            Enviar Mensagem <ArrowRight size={18} />
+          </button>
+
+          <p className="text-center text-gray-500 text-sm">
+            Sem necessidade de pagamento. Entraremos em contacto em menos de 24 horas.
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 /* ── COMPONENTE PRINCIPAL ───────────────────────────────────── */
 export default function AgencyPortfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTeamSlide, setActiveTeamSlide] = useState(0);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -129,10 +297,16 @@ export default function AgencyPortfolio() {
   const nextSlide = () => setActiveTeamSlide((prev) => (prev === 0 ? 1 : 0));
   const prevSlide = () => setActiveTeamSlide((prev) => (prev === 0 ? 1 : 0));
 
+  const openContactModal = () => {
+    setMobileMenuOpen(false);
+    setIsContactModalOpen(true);
+  };
+
   return (
     <>
       <GlobalStyles />
-      
+      <ContactModal open={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
+
       {/* ── MENU HEADER ── */}
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <header 
@@ -154,9 +328,9 @@ export default function AgencyPortfolio() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a href="#contact" className="hidden md:block bg-blue-500 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+            <button onClick={openContactModal} className="hidden md:block bg-blue-500 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
               Começar Website
-            </a>
+            </button>
             <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
@@ -170,7 +344,7 @@ export default function AgencyPortfolio() {
           <a href="#services" onClick={handleNavClick} className="hover:text-white transition-colors">Serviços</a>
           <a href="#portfolio" onClick={handleNavClick} className="hover:text-white transition-colors">Portefólio</a>
           <a href="#team" onClick={handleNavClick} className="hover:text-white transition-colors">A Equipa</a>
-          <a href="#contact" onClick={handleNavClick} className="text-white mt-2 pb-2 border-b border-white/20">Começar Website</a>
+          <button onClick={openContactModal} className="text-left text-white mt-2 pb-2 border-b border-white/20">Começar Website</button>
         </div>
       )}
 
@@ -200,9 +374,9 @@ export default function AgencyPortfolio() {
           </p>
           
           <div className="flex flex-wrap items-center justify-center gap-4 mb-20 w-full">
-            <a href="#contact" className="px-8 py-4 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center gap-2 hover:scale-105">
+            <button onClick={openContactModal} className="px-8 py-4 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center gap-2 hover:scale-105">
               Começar Agora <ArrowRight size={18} />
-            </a>
+            </button>
             <button className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-[15px] hover:bg-white/5 transition-all flex items-center gap-2">
               <Calendar size={18} /> Agendar Reunião
             </button>
@@ -247,13 +421,8 @@ export default function AgencyPortfolio() {
                   <img
                     src={work.img}
                     alt={work.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <p className="text-xs font-bold tracking-widest uppercase text-blue-500 mb-1">{work.category}</p>
@@ -312,9 +481,9 @@ export default function AgencyPortfolio() {
           {/* CTA Serviços */}
           <div className="text-center flex flex-col items-center mt-16 animate-fade-up">
             <LogoVA className="w-16 h-16 text-white mb-6 transition-transform hover:scale-110 duration-500" />
-            <a href="#contact" className="inline-flex items-center gap-2 px-10 py-5 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105">
+            <button onClick={openContactModal} className="inline-flex items-center gap-2 px-10 py-5 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105">
               Começar o meu Website <ArrowRight size={18} />
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -357,9 +526,9 @@ export default function AgencyPortfolio() {
               Pronto para ter uma presença online que realmente funciona?
             </h3>
             <LogoVA className="w-16 h-16 text-white mb-6 transition-transform hover:scale-110 duration-500" />
-            <a href="#contact" className="inline-flex items-center gap-2 px-10 py-5 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105">
+            <button onClick={openContactModal} className="inline-flex items-center gap-2 px-10 py-5 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105">
               Começar o meu Website <ArrowRight size={18} />
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -462,79 +631,9 @@ export default function AgencyPortfolio() {
               Vamos construir algo de que se orgulhe e possa mostrar.
             </h3>
             <LogoVA className="w-16 h-16 text-white mb-6 transition-transform hover:scale-110 duration-500" />
-            <a href="#contact" className="inline-flex items-center gap-2 px-10 py-5 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105">
+            <button onClick={openContactModal} className="inline-flex items-center gap-2 px-10 py-5 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105">
               Começar o seu Website <ArrowRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CONTACTO ── */}
-      <section id="contact" className="py-24 md:py-32 px-6">
-        <div className="max-w-7xl mx-auto bg-[#111] border border-white/10 rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] relative flex flex-col lg:flex-row">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-50" />
-          
-          <div className="lg:w-5/12 p-12 md:p-20 text-white relative z-10 flex flex-col justify-between bg-[#0a0a0a]">
-            <div>
-              <p className="text-blue-500 font-bold tracking-widest uppercase text-xs mb-6">Contacto</p>
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 leading-tight">
-                Pronto para a <br/><span className="text-gray-400 font-medium">mudança?</span>
-              </h2>
-              <p className="text-gray-400 mb-12 leading-relaxed text-lg font-light">
-                Preencha o formulário. Entraremos em contacto em menos de 24 horas para estruturarmos o próximo passo do seu negócio.
-              </p>
-            </div>
-            <div className="space-y-8">
-              <div className="flex items-center gap-6 group">
-                <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-blue-500 group-hover:border-blue-500 transition-all duration-500">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-gray-500 font-bold mb-1">Email</p>
-                  <p className="font-semibold text-lg">hello@agencia.com</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-6 group">
-                <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-blue-500 group-hover:border-blue-500 transition-all duration-500">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-gray-500 font-bold mb-1">Telefone</p>
-                  <p className="font-semibold text-lg">+351 912 345 678</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:w-7/12 p-12 md:p-20">
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-3">
-                  <label className="text-xs font-bold tracking-widest uppercase text-gray-400">O seu Nome</label>
-                  <input type="text" placeholder="Nome Completo" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-xs font-bold tracking-widest uppercase text-gray-400">O seu Email</label>
-                  <input type="email" placeholder="email@empresa.com" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
-                </div>
-              </div>
-              <div className="space-y-3">
-                <label className="text-xs font-bold tracking-widest uppercase text-gray-400">O que procura?</label>
-                <select className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white focus:border-blue-500 focus:ring-0 outline-none transition-all appearance-none cursor-pointer">
-                  <option className="bg-black text-white">Criação / Re-design de Website</option>
-                  <option className="bg-black text-white">Conteúdo & Gestão de Redes Sociais</option>
-                  <option className="bg-black text-white">Tráfego Pago (Google/Facebook Ads)</option>
-                  <option className="bg-black text-white">Estratégia Completa & Rebranding</option>
-                </select>
-              </div>
-              <div className="space-y-3">
-                <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Detalhes do Projeto</label>
-                <textarea rows="3" placeholder="Fale-nos um pouco sobre a visão que tem em mente..." className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all resize-none"></textarea>
-              </div>
-              <button type="submit" className="w-full py-5 bg-blue-500 text-white rounded-full font-bold text-base hover:bg-blue-600 transition-all duration-500 hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                Enviar Mensagem <ArrowRight size={18} />
-              </button>
-            </form>
+            </button>
           </div>
         </div>
       </section>
