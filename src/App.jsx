@@ -373,11 +373,6 @@ export default function AgencyPortfolio() {
                     alt={work.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
                   />
-                  <div className="absolute top-3 left-3 flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <p className="text-xs font-bold tracking-widest uppercase text-blue-500 mb-1">{work.category}</p>
