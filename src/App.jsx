@@ -107,12 +107,10 @@ const TEAM = [
 ];
 
 const TESTIMONIALS = [
-  { name: "Vida Cafe", text: "The site feels warm and premium, and our online orders jumped immediately. Jack organized everything so customers find the menu and location fast." },
-  { name: "Vines Hair Studio", text: "Jack nailed the look and kept the booking flow simple. The team page and service layout have been a huge upgrade for us." },
-  { name: "Vines33", text: "Our product brand finally has a site that feels legit. The visuals, layout, and CTA flow are exactly what we needed to convert." },
-  { name: "Ponch Blendz", text: "Fast turnaround and clean design. The site looks modern and customers can find our booking info instantly." },
-  { name: "Tandy's Window Services", text: "Our new website finally matches the quality of our work. It brought in more quote requests within the first week." },
-  { name: "CE Jewelry", text: "The site feels luxury without being overdone. Customers stay longer and the product pages are easy to browse." }
+  { name: "Optica 13", text: "The site feels warm and premium, and our online orders jumped immediately. Jack organized everything so customers find the menu and location fast." },
+  { name: "cenawrld", text: "Jack nailed the look and kept the booking flow simple. The team page and service layout have been a huge upgrade for us." },
+  { name: "fillerdoq", text: "Our product brand finally has a site that feels legit. The visuals, layout, and CTA flow are exactly what we needed to convert." },
+  { name: "Willchair", text: "Fast turnaround and clean design. The site looks modern and customers can find our booking info instantly." },
 ];
 
 const BUDGET_OPTIONS = [
