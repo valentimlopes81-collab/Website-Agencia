@@ -48,6 +48,9 @@ export const TESTIMONIALS = [
   { name: "Willchair", text: "Fast turnaround and clean design. The site looks modern and customers can find our booking info instantly." },
 ];
 
+// Placeholder até teres uma conta Calendly/Cal.com — substitui pelo link real.
+export const CALENDLY_URL = "https://calendly.com/va-digital/chamada-30-min";
+
 export const BUDGET_OPTIONS = [
   { value: "<500", label: "Menos de 500€" },
   { value: "500-1500", label: "500€ - 1.500€" },

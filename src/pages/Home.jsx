@@ -78,9 +78,9 @@ export default function Home() {
             <button onClick={openContactModal} className="px-8 py-4 bg-blue-500 text-white rounded-full font-bold text-[15px] hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] flex items-center gap-2 hover:scale-105">
               Começar Agora <ArrowRight size={18} />
             </button>
-            <button className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-[15px] hover:bg-white/5 transition-all flex items-center gap-2">
+            <Link to="/agendar" className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-[15px] hover:bg-white/5 transition-all flex items-center gap-2">
               <Calendar size={18} /> Agendar Reunião
-            </button>
+            </Link>
             <a href="#portfolio" className="px-8 py-4 bg-white text-black rounded-full font-bold text-[15px] hover:bg-gray-200 transition-all">
               Ver Portefólio
             </a>
