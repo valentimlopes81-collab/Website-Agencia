@@ -1,7 +1,7 @@
-import { ArrowRight, Quote } from 'lucide-react';
+import { ArrowRight, Quote, Star } from 'lucide-react';
 import { GlobalStyles, LogoVA, Header, Footer, ContactModal } from '../Shared';
 import { useSiteLayout } from '../useSiteLayout';
-import { TEAM } from '../data';
+import { TESTIMONIALS } from '../data';
 
 export default function Testimonials() {
   const { isScrolled, mobileMenuOpen, setMobileMenuOpen, isContactModalOpen, setIsContactModalOpen, openContactModal } = useSiteLayout();
@@ -22,42 +22,45 @@ export default function Testimonials() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-20 animate-fade-up">
-            <p className="text-blue-500 font-bold tracking-widest uppercase text-xs mb-4">A Equipa</p>
+            <p className="text-blue-500 font-bold tracking-widest uppercase text-xs mb-4">Clientes Satisfeitos</p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
               Os Nossos <span className="text-blue-500 text-glow-blue">Testemunhos</span>
             </h1>
             <p className="text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
-              Conheça as pessoas por trás da agência e a visão que move cada projeto.
+              O que dizem as marcas e negócios que já confiaram em nós para construir a sua presença online.
             </p>
           </div>
 
-          <div className="space-y-12 mb-20">
-            {TEAM.map((person, idx) => (
-              <div key={idx} className="flex flex-col md:flex-row gap-8 items-center md:items-start animate-fade-up">
-                <div className="relative w-48 h-48 md:w-56 md:h-56 flex-shrink-0">
-                  <div className="absolute inset-0 bg-blue-500 blur-[60px] opacity-60 rounded-full z-0 transform scale-90"></div>
-                  <img
-                    src={person.image}
-                    alt={person.name}
-                    className="w-full h-full object-cover rounded-3xl relative z-10 border border-white/10 shadow-2xl"
-                  />
-                </div>
-                <div className="w-full text-left bg-[#111] p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-xl">
-                  <div className="mb-6 border-b border-white/10 pb-6">
-                    <h3 className="text-2xl font-display font-bold text-white mb-1">{person.name}</h3>
-                    <p className="text-blue-500 font-semibold tracking-wide uppercase text-xs">{person.role}</p>
-                  </div>
-                  <div className="space-y-4">
-                    <Quote size={30} className="text-blue-500/20 float-left mr-3 -mt-2" />
-                    {person.bio.split('\n\n').map((paragraph, pIdx) => (
-                      <p key={pIdx} className="text-gray-300 text-sm md:text-base leading-relaxed font-light">
-                        {paragraph}
-                      </p>
+          <div className="grid md:grid-cols-2 gap-6 mb-20">
+            {TESTIMONIALS.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-[#0d0d0d] rounded-2xl border border-white/5 p-8 flex flex-col relative transition-all duration-300 hover:border-blue-500/30 group"
+              >
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} size={16} fill="#3b82f6" className="text-blue-500" />
                     ))}
                   </div>
+                  <Quote size={24} className="text-blue-500/20 group-hover:text-blue-500 transition-colors duration-300" />
+                </div>
+                <p className="text-gray-300 text-[15px] leading-relaxed font-light mb-8 flex-1">
+                  "{item.text}"
+                </p>
+                <div className="border-t border-white/5 pt-4">
+                  <h4 className="text-white font-display font-bold text-sm tracking-wide">{item.name}</h4>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="text-center max-w-2xl mx-auto mb-20 animate-fade-up">
+            <Quote size={32} className="text-blue-500/30 mx-auto mb-6" />
+            <p className="text-white text-2xl md:text-3xl font-display font-light italic leading-relaxed mb-4">
+              "Tudo vale a pena se a alma não é pequena."
+            </p>
+            <p className="text-blue-500 font-semibold tracking-widest uppercase text-xs">— Fernando Pessoa</p>
           </div>
 
           <div className="bg-[#111] border border-white/5 rounded-2xl overflow-hidden shadow-2xl mb-16 animate-fade-up">

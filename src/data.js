@@ -41,6 +41,16 @@ export const TEAM = [
   }
 ];
 
+export const TESTIMONIALS = [
+  { name: "Optica 13", text: "The site feels warm and premium, and our online orders jumped immediately. Jack organized everything so customers find the menu and location fast." },
+  { name: "cenawrld", text: "Jack nailed the look and kept the booking flow simple. The team page and service layout have been a huge upgrade for us." },
+  { name: "fillerdoq", text: "Our product brand finally has a site that feels legit. The visuals, layout, and CTA flow are exactly what we needed to convert." },
+  { name: "Willchair", text: "Fast turnaround and clean design. The site looks modern and customers can find our booking info instantly." },
+];
+
+// Placeholder até teres uma conta Calendly/Cal.com — substitui pelo link real.
+export const CALENDLY_URL = "https://calendly.com/va-digital/chamada-30-min";
+
 export const BUDGET_OPTIONS = [
   { value: "<500", label: "Menos de 500€" },
   { value: "500-1500", label: "500€ - 1.500€" },
