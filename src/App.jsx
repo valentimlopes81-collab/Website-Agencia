@@ -562,45 +562,62 @@ export default function AgencyPortfolio() {
         </div>
       </section>
 
-      {/* ── SECÇÃO: TESTEMUNHOS ── */}
-<section id="testimonials" className="py-24 md:py-32 px-6 bg-black border-t border-white/5">
-  <div className="max-w-7xl mx-auto">
+   {/* ── SECÇÃO: TESTEMUNHOS (CARROSSEL HORIZONTAL) ── */}
+<section id="testimonials" className="py-24 md:py-32 px-6 bg-black border-t border-white/5 overflow-hidden">
+  <div className="max-w-7xl mx-auto relative">
     <div className="text-center mb-16 animate-fade-up">
       <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
         What My <span className="text-blue-500 text-glow-blue">Clients</span> Are Saying
       </h2>
     </div>
 
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      {TESTIMONIALS.map((item, idx) => (
-        <div key={idx} className="bg-[#0d0d0d] rounded-2xl border border-white/5 p-8 flex flex-col relative transition-all duration-300 hover:border-blue-500/30 group">
-          {/* Ícone de Aspas e Estrelas */}
-          <div className="flex justify-between items-start mb-6">
-            <div className="flex gap-1">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} size={16} fill="#3b82f6" className="text-blue-500" />
-              ))}
+    {/* Contentor do Carrossel */}
+    <div className="relative w-full">
+      
+      {/* Efeito de desvanecimento à direita para indicar claramente que há mais conteúdo */}
+      <div className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+      {/* Esconder a barra de scroll nativa com CSS inline */}
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
+      <div className="hide-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2 cursor-grab active:cursor-grabbing">
+        {TESTIMONIALS.map((item, idx) => (
+          <div 
+            key={idx} 
+            // A largura fixa (w-[85vw] no mobile, w-[400px] em ecrãs maiores) garante que o próximo cartão fica cortado, indicando scroll
+            className="snap-start shrink-0 w-[85vw] md:w-[400px] bg-[#0d0d0d] rounded-2xl border border-white/5 p-8 flex flex-col relative transition-all duration-300 hover:border-blue-500/30 group"
+          >
+            {/* Ícone de Aspas e Estrelas */}
+            <div className="flex justify-between items-start mb-6">
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <Star key={s} size={16} fill="#3b82f6" className="text-blue-500" />
+                ))}
+              </div>
+              <Quote size={24} className="text-blue-500/20 group-hover:text-blue-500 transition-colors duration-300" />
             </div>
-            <Quote size={24} className="text-blue-500/20 group-hover:text-blue-500 transition-colors duration-300" />
-          </div>
 
-          {/* Texto do Testemunho */}
-          <p className="text-gray-300 text-[15px] leading-relaxed font-light mb-8 flex-1">
-            "{item.text}"
-          </p>
+            {/* Texto do Testemunho */}
+            <p className="text-gray-300 text-[15px] leading-relaxed font-light mb-8 flex-1">
+              "{item.text}"
+            </p>
 
-          {/* Linha divisória subtil */}
-          <div className="border-t border-white/5 pt-4">
-            <h4 className="text-white font-display font-bold text-sm tracking-wide">
-              {item.name}
-            </h4>
+            {/* Linha divisória subtil */}
+            <div className="border-t border-white/5 pt-4">
+              <h4 className="text-white font-display font-bold text-sm tracking-wide">
+                {item.name}
+              </h4>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
 
     {/* Botão See More Testimonials */}
-    <div className="flex justify-center mt-12">
+    <div className="flex justify-center mt-8 relative z-20">
       <button className="px-8 py-3 bg-transparent hover:bg-white/5 text-gray-300 hover:text-white border border-white/10 rounded-full font-medium text-sm transition-all duration-300">
         See More Testimonials
       </button>
