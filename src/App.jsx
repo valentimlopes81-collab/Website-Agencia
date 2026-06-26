@@ -75,12 +75,12 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { id: 1, title: "Villa Aurora", category: "Alojamento de Luxo & Reservas", desc: "Site de apresentação para um alojamento privado de luxo em Malta, com galeria imersiva, quartos, comodidades, avaliações e sistema de reserva direta.", url: "https://villa-silk.vercel.app/", img: "/portfolio/villa.webp" },
-  { id: 2, title: "Óptica 13", category: "E-commerce & Serviços Óticos", desc: "Website para óptica com agendamento de exames de optometria gratuitos, catálogo de marcas premium e quiz de estilo interativo.", url: "https://optica13.shop/", img: "/portfolio/optica13.webp" },
-  { id: 3, title: "Willchair", category: "Landing Page de Startup", desc: "Página de apresentação de um projeto de empreendedorismo: um kit modular híbrido-elétrico que transforma qualquer cadeira de rodas manual numa elétrica, a uma fração do custo do mercado.", url: "https://willchair.vercel.app/", img: "/portfolio/willchair.webp" },
-  { id: 4, title: "Cenawrld", category: "E-commerce de Moda & Streetwear", desc: "Loja online de streetwear urbano com identidade visual forte, coleções para homem e mulher e checkout otimizado.", url: "https://cenawrld.com/", img: "/portfolio/cenawrld.webp" },
-  { id: 5, title: "Corte & Calma", category: "Marcações Online — Barbearia", desc: "Website para barbearia em Lisboa com sistema de reservas, apresentação de packs, equipa e contacto direto por WhatsApp.", url: "https://corte-e-calma-1.vercel.app/", img: "/portfolio/corte-e-calma.webp" },
-  { id: 6, title: "Lumina", category: "Clínica de Estética & Beleza", desc: "Website para clínica de tratamentos estéticos no Chiado, com marcação de consultas, lista de preços e prova social com centenas de avaliações.", url: "https://lumina-sigma-weld.vercel.app/", img: "/portfolio/lumina.webp" },
+  { id: 1, title: "Villa Aurora", category: "Alojamento de Luxo & Reservas", desc: "Site de apresentação para um alojamento privado de luxo em Malta, com galeria imersiva, quartos, comodidades, avaliações e sistema de reserva direta.", url: "https://villa-silk.vercel.app/", img: "/villa.webp" },
+  { id: 2, title: "Óptica 13", category: "E-commerce & Serviços Óticos", desc: "Website para óptica com agendamento de exames de optometria gratuitos, catálogo de marcas premium e quiz de estilo interativo.", url: "https://optica13.shop/", img: "/optica13.webp" },
+  { id: 3, title: "Willchair", category: "Landing Page de Startup", desc: "Página de apresentação de um projeto de empreendedorismo: um kit modular híbrido-elétrico que transforma qualquer cadeira de rodas manual numa elétrica, a uma fração do custo do mercado.", url: "https://willchair.vercel.app/", img: "/willchair.webp" },
+  { id: 4, title: "Cenawrld", category: "E-commerce de Moda & Streetwear", desc: "Loja online de streetwear urbano com identidade visual forte, coleções para homem e mulher e checkout otimizado.", url: "https://cenawrld.com/", img: "/cenawrld.webp" },
+  { id: 5, title: "Corte & Calma", category: "Marcações Online — Barbearia", desc: "Website para barbearia em Lisboa com sistema de reservas, apresentação de packs, equipa e contacto direto por WhatsApp.", url: "https://corte-e-calma-1.vercel.app/", img: "/corte-e-calma.webp" },
+  { id: 6, title: "Lumina", category: "Clínica de Estética & Beleza", desc: "Website para clínica de tratamentos estéticos no Chiado, com marcação de consultas, lista de preços e prova social com centenas de avaliações.", url: "https://lumina-sigma-weld.vercel.app/", img: "/lumina.webp" },
 ];
 
 const PROCESS = [
