@@ -371,7 +371,7 @@ export default function AgencyPortfolio() {
                   <img
                     src={work.img}
                     alt={work.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-1">
