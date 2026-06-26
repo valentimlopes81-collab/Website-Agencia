@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu, X, ArrowRight, Code, Zap, Smartphone, Search, Rocket, CheckCircle,
   Phone, Eye, Star, Calendar, Monitor, Camera, Compass,
@@ -106,9 +106,67 @@ const TEAM = [
   }
 ];
 
+const BUDGET_OPTIONS = [
+  { value: "<500", label: "Menos de 500€" },
+  { value: "500-1500", label: "500€ - 1.500€" },
+  { value: "1500-3000", label: "1.500€ - 3.000€" },
+  { value: ">3000", label: "Mais de 3.000€" },
+];
+
+/* ── DROPDOWN CUSTOMIZADO ──────────────────────────────────── */
+const CustomSelect = ({ options, value, onChange, placeholder }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selected = options.find((o) => o.value === value);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-blue-500 bg-transparent text-left transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+      >
+        <span className={selected ? "text-white" : "text-gray-500"}>
+          {selected ? selected.label : placeholder}
+        </span>
+        <ChevronDown size={18} className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute z-20 mt-2 w-full bg-[#111] border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-fade-up" style={{ animationDuration: '0.2s' }}>
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => { onChange(opt.value); setIsOpen(false); }}
+              className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                value === opt.value
+                  ? 'bg-blue-500/10 text-blue-500'
+                  : 'text-gray-300 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 /* ── MODAL "VAMOS CONSTRUIR O SEU WEBSITE" ──────────────────── */
 const ContactModal = ({ open, onClose }) => {
   const [hasWebsite, setHasWebsite] = useState(null);
+  const [budget, setBudget] = useState(null);
 
   if (!open) return null;
 
@@ -194,20 +252,12 @@ const ContactModal = ({ open, onClose }) => {
             <label className="text-sm font-bold text-white">
               Orçamento do Projeto <span className="text-red-500">*</span>
             </label>
-            <div className="relative">
-              <select
-                defaultValue=""
-                required
-                className="w-full px-4 py-3 rounded-xl border border-blue-500 bg-transparent text-white focus:ring-0 outline-none transition-all appearance-none cursor-pointer shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-              >
-                <option value="" disabled className="bg-black text-gray-400">Selecione o seu orçamento</option>
-                <option value="<500" className="bg-black text-white">Menos de 500€</option>
-                <option value="500-1500" className="bg-black text-white">500€ - 1.500€</option>
-                <option value="1500-3000" className="bg-black text-white">1.500€ - 3.000€</option>
-                <option value=">3000" className="bg-black text-white">Mais de 3.000€</option>
-              </select>
-              <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-            </div>
+            <CustomSelect
+              options={BUDGET_OPTIONS}
+              value={budget}
+              onChange={setBudget}
+              placeholder="Selecione o seu orçamento"
+            />
           </div>
 
           <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-full font-bold text-base hover:bg-blue-600 transition-all duration-500 hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
