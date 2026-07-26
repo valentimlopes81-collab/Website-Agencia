@@ -49,7 +49,7 @@ export const TESTIMONIALS = [
 ];
 
 // Placeholder até teres uma conta Calendly/Cal.com — substitui pelo link real.
-export const CALENDLY_URL = "https://calendly.com/va-digital/chamada-30-min";
+export const CALENDLY_URL = "https://calendly.com/agenciava0digital/30min";
 
 export const BUDGET_OPTIONS = [
   { value: "<500", label: "Menos de 500€" },
