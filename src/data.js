@@ -42,9 +42,9 @@ export const TEAM = [
 ];
 
 export const TESTIMONIALS = [
-  { name: "Optica 13", text: "The site feels warm and premium, and our online orders jumped immediately. Jack organized everything so customers find the menu and location fast." },
-  { name: "cenawrld", text: "Jack nailed the look and kept the booking flow simple. The team page and service layout have been a huge upgrade for us." },
-  { name: "fillerdoq", text: "Our product brand finally has a site that feels legit. The visuals, layout, and CTA flow are exactly what we needed to convert." },
+  { name: "Optica 13", text: "A nossa loja precisava de uma renovação e o resultado final superou todas as expectativas. O site ficou lindo, com uma estética super atrativa que valoriza muito os nossos artigos. Mas o que mais nos impressionou foi o "backoffice": a logística e a organização dos dados dos clientes nunca foram tão fáceis de gerir. Ganhámos tempo, organização e, o mais importante de tudo, aumentámos imenso as nossas conversões. Um serviço 5 estrelas!" },
+  { name: "cenawrld", text: "O novo site transformou completamente a nossa loja de roupa. O design visual está incrível e a experiência de compra é tão fluida que as nossas conversões dispararam! Além da estética irrepreensível, a gestão do dia a dia ficou muito mais ágil. Agora temos toda a informação e dados dos clientes centralizados de forma perfeitamente organizada. Recomendo vivamente o excelente trabalho!" },
+  { name: "fillerdoq", text: "Serviço super rápido e um design impecável! O meu site tem agora um visual super moderno. Ficou muito mais fácil para os clientes fazerem marcações e verem os meus trabalhos anteriores de forma bastante criativa e eficiente." },
   { name: "Willchair", text: "Fast turnaround and clean design. The site looks modern and customers can find our booking info instantly." },
 ];
 
