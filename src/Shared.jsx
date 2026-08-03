@@ -237,7 +237,7 @@ export const Header = ({ openContactModal, mobileMenuOpen, setMobileMenuOpen, is
           }`}
         >
           <Link to="/" className="flex items-center text-white hover:opacity-80 transition-opacity">
-  <img src="/logo.svg" alt="VA Logo" className="w-12 h-12 object-contain" />
+  <img src="/logoVA.png" alt="VA Logo" className="w-12 h-12 object-contain" />
 </Link>
 
           <nav className="hidden md:flex items-center gap-8 font-medium text-[14px] text-gray-300">
