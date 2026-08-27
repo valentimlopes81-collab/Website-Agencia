@@ -89,7 +89,7 @@ export default function Home() {
           <div className="flex flex-col items-center w-full max-w-2xl animate-fade-up animate-delay-2">
             <div className="border-l-2 border-blue-500 pl-6 md:pl-8 text-left w-full mb-10">
               <p className="text-gray-400 italic text-lg md:text-xl font-light leading-relaxed">
-                "Nós tratamos da tecnologia, tu geres o teu negócio. Vamos construir algo de que te orgulhes e que possas mostrar sem dores de cabeça."
+                “Nós tratamos da tecnologia, tu géres o teu negócio. Vamos construir algo de que te orgulhes e que possas mostrar sem dores de cabeça.”
               </p>
             </div>
             <LogoVA className="w-16 h-16 text-white mb-8" />
@@ -116,7 +116,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {PORTFOLIO.map((work) => (
+            {PORTFOLIO.slice(0, 6).map((work) => (
               <div key={work.id} className="premium-hover bg-[#111] rounded-2xl border border-white/5 overflow-hidden flex flex-col group">
                 <div className="relative h-48 overflow-hidden bg-[#222]">
                   <img
@@ -203,7 +203,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
             {[
-              { icon: Search, title: "Visibilidade no Google", desc: "Apareça quando alguém pesquisa pelos seus serviços na sua área. Mais olhos no seu site significa mais clientes a descobrir, ligar e escolher-lhe a si em vez de concorrentes que não aparecem online." },
+              { icon: Search, title: "Visibilidade no Google", desc: "Appareça quando alguém pesquisa pelos seus serviços na sua área. Mais olhos no seu site significa mais clientes a descobrir, ligar e escolher-lhe a si em vez de concorrentes que não aparecem online." },
               { icon: Zap, title: "Mais Clientes", desc: "Novos clientes encontram-no e contactam-no através do seu próprio site, 24/7. O seu website trabalha sem parar para atrair leads, responder a perguntas e converter visitantes em clientes pagantes, mesmo enquanto dorme." },
               { icon: Star, title: "Primeira Impressão Profissional", desc: "As pessoas julgam o seu negócio em segundos. Um website personalizado garante que aparenta ser profissional, credível e estabelecido. A primeira impressão define se alguém pega no telefone ou passa à frente." },
               { icon: Phone, title: "Contacto e Pedidos Fáceis", desc: "Sem mensagens perdidas em DMs ou textos. Os clientes contactam-no diretamente pelo site com formulários, sistemas de marcação ou chamadas diretas. Cada pedido é captado, organizado e pronto para fechar." },
