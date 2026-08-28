@@ -262,7 +262,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 animate-fade-up gap-8">
             <div className="text-center md:text-left">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
-                What My <span className="text-blue-500 text-glow-blue">Clients</span> Are Saying
+                O Que Os Nossos <span className="text-blue-500 text-glow-blue">Clientes</span> Dizem
               </h2>
             </div>
 
@@ -329,7 +329,7 @@ export default function Home() {
               to="/testemunhos"
               className="px-8 py-3 bg-transparent hover:bg-white/5 text-gray-300 hover:text-white border border-white/10 rounded-full font-medium text-sm transition-all duration-300"
             >
-              See More Testimonials
+              Ver Mais Testemunhos
             </Link>
           </div>
         </div>
