@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { BUDGET_OPTIONS } from './data';
 
-/* ── ESTILOS GLOBAIS E ANIMAÇÕES PREMIUM ─────────────────────── */
+/* ── ESTILOS GLOBAIS E ANIMAÇÕES PREMIUM ─────────────── */
 export const GlobalStyles = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
@@ -54,7 +54,7 @@ export const GlobalStyles = () => (
   `}</style>
 );
 
-/* ── COMPONENTE DO LOGO (V + A GEOMÉTRICO) ─────────────── */
+/* ── COMPONENTE DO LOGO (V + A GEOMÉTRICO) ────────────── */
 export const LogoVA = ({ className = "w-14 h-14" }) => (
   <svg viewBox="0 0 40 40" className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
     <path d="M8 10 L16 30 L24 10 L32 30" />
@@ -62,7 +62,7 @@ export const LogoVA = ({ className = "w-14 h-14" }) => (
   </svg>
 );
 
-/* ── DROPDOWN CUSTOMIZADO ──────────────────────────────────── */
+/* ── DROPDOWN CUSTOMIZADO ───────────────────────── */
 export const CustomSelect = ({ options, value, onChange, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
@@ -112,117 +112,201 @@ export const CustomSelect = ({ options, value, onChange, placeholder }) => {
   );
 };
 
-/* ── MODAL "VAMOS CONSTRUIR O SEU WEBSITE" ──────────────────── */
+/* ── MODAL "VAMOS CONSTRUIR O SEU WEBSITE" ───────────── */
+// Email que recebe os pedidos do formulário.
+const FORM_EMAIL = 'agenciava0digital@gmail.com';
+
 export const ContactModal = ({ open, onClose }) => {
   const [hasWebsite, setHasWebsite] = useState(null);
   const [budget, setBudget] = useState(null);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('');
 
   if (!open) return null;
+
+  const budgetLabel = (BUDGET_OPTIONS.find((o) => o.value === budget) || {}).label || '';
+
+  const closeAndReset = () => {
+    setStatus('idle');
+    setErrorMsg('');
+    setHasWebsite(null);
+    setBudget(null);
+    onClose();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    if (!hasWebsite) {
+      setErrorMsg('Por favor indique se já tem um website.');
+      return;
+    }
+    if (!budget) {
+      setErrorMsg('Por favor selecione o orçamento do projeto.');
+      return;
+    }
+    setErrorMsg('');
+
+    const payload = {
+      'Nome Completo': form.nome.value,
+      'Email': form.email.value,
+      'Telefone': form.telefone.value,
+      'Descrição do Projeto': form.projeto.value,
+      'Já tem website?': hasWebsite === 'sim' ? 'Sim' : 'Não',
+      'Orçamento': budgetLabel,
+      _subject: `Novo pedido pelo site — ${form.nome.value}`,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    setStatus('sending');
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${FORM_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Falha no envio');
+      setStatus('success');
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg('Não foi possível enviar. Tente novamente ou contacte-nos diretamente.');
+    }
+  };
 
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-      onClick={onClose}
+      onClick={closeAndReset}
     >
       <div
         className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-white/10 rounded-3xl shadow-2xl p-8 md:p-10"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={onClose}
+          onClick={closeAndReset}
           className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
           aria-label="Fechar"
         >
           <X size={24} />
         </button>
 
-        <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
-          Vamos Construir o Seu Website
-        </h2>
-        <p className="text-gray-400 font-light mb-8">
-          Formulário rápido. Respondemos em menos de 24 horas.
-        </p>
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onClose();
-          }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Nome Completo</label>
-            <input type="text" placeholder="João Silva" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Email</label>
-            <input type="email" placeholder="joao@empresa.com" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Número de Telefone</label>
-            <input type="tel" placeholder="+351 912 345 678" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Fale-nos do seu projeto</label>
-            <textarea rows="3" placeholder="Descreva o seu negócio, o que precisa que o site faça, ideias que tenha, etc." className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all resize-none" required></textarea>
-          </div>
-
-          <div className="space-y-3">
-            <label className="text-sm font-bold text-white">
-              Já tem um website atual? <span className="text-red-500">*</span>
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setHasWebsite('sim')}
-                className={`py-3 rounded-xl border font-semibold transition-all ${
-                  hasWebsite === 'sim'
-                    ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
-                    : 'border-white/15 text-gray-400 hover:border-white/30'
-                }`}
-              >
-                Sim
-              </button>
-              <button
-                type="button"
-                onClick={() => setHasWebsite('nao')}
-                className={`py-3 rounded-xl border font-semibold transition-all ${
-                  hasWebsite === 'nao'
-                    ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
-                    : 'border-white/15 text-gray-400 hover:border-white/30'
-                }`}
-              >
-                Não
-              </button>
+        {status === 'success' ? (
+          <div className="flex flex-col items-center text-center py-10">
+            <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500 flex items-center justify-center mb-6 shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+              <CheckCircle2 size={32} className="text-blue-500" />
             </div>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-3">
+              Pedido Enviado!
+            </h2>
+            <p className="text-gray-400 font-light mb-8 max-w-sm">
+              Recebemos as suas respostas e entraremos em contacto em menos de 24 horas.
+            </p>
+            <button
+              onClick={closeAndReset}
+              className="px-8 py-3 bg-blue-500 text-white rounded-full font-bold text-sm hover:bg-blue-600 transition-all"
+            >
+              Fechar
+            </button>
           </div>
+        ) : (
+          <>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+              Vamos Construir o Seu Website
+            </h2>
+            <p className="text-gray-400 font-light mb-8">
+              Formulário rápido. Respondemos em menos de 24 horas.
+            </p>
 
-          <div className="space-y-3">
-            <label className="text-sm font-bold text-white">
-              Orçamento do Projeto <span className="text-red-500">*</span>
-            </label>
-            <CustomSelect
-              options={BUDGET_OPTIONS}
-              value={budget}
-              onChange={setBudget}
-              placeholder="Selecione o seu orçamento"
-            />
-          </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Nome Completo</label>
+                <input name="nome" type="text" placeholder="João Silva" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Email</label>
+                <input name="email" type="email" placeholder="joao@empresa.com" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Número de Telefone</label>
+                <input name="telefone" type="tel" placeholder="+351 912 345 678" className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all" required />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold tracking-widest uppercase text-gray-400">Fale-nos do seu projeto</label>
+                <textarea name="projeto" rows="3" placeholder="Descreva o seu negócio, o que precisa que o site faça, ideias que tenha, etc." className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-gray-600 focus:border-blue-500 focus:ring-0 outline-none transition-all resize-none" required></textarea>
+              </div>
 
-          <button type="submit" className="w-full py-4 bg-blue-500 text-white rounded-full font-bold text-base hover:bg-blue-600 transition-all duration-500 hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-            Enviar Mensagem <ArrowRight size={18} />
-          </button>
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-white">
+                  Já tem um website atual? <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setHasWebsite('sim')}
+                    className={`py-3 rounded-xl border font-semibold transition-all ${
+                      hasWebsite === 'sim'
+                        ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                        : 'border-white/15 text-gray-400 hover:border-white/30'
+                    }`}
+                  >
+                    Sim
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHasWebsite('nao')}
+                    className={`py-3 rounded-xl border font-semibold transition-all ${
+                      hasWebsite === 'nao'
+                        ? 'border-blue-500 text-white bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                        : 'border-white/15 text-gray-400 hover:border-white/30'
+                    }`}
+                  >
+                    Não
+                  </button>
+                </div>
+              </div>
 
-          <p className="text-center text-gray-500 text-sm">
-            Sem necessidade de pagamento. Entraremos em contacto em menos de 24 horas.
-          </p>
-        </form>
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-white">
+                  Orçamento do Projeto <span className="text-red-500">*</span>
+                </label>
+                <CustomSelect
+                  options={BUDGET_OPTIONS}
+                  value={budget}
+                  onChange={setBudget}
+                  placeholder="Selecione o seu orçamento"
+                />
+              </div>
+
+              {errorMsg && (
+                <p className="text-red-400 text-sm text-center">{errorMsg}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="w-full py-4 bg-blue-500 text-white rounded-full font-bold text-base hover:bg-blue-600 transition-all duration-500 hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)] disabled:opacity-60 disabled:hover:scale-100 disabled:cursor-not-allowed"
+              >
+                {status === 'sending' ? (
+                  <><Loader2 size={18} className="animate-spin" /> A enviar...</>
+                ) : (
+                  <>Enviar Mensagem <ArrowRight size={18} /></>
+                )}
+              </button>
+
+              <p className="text-center text-gray-500 text-sm">
+                Sem necessidade de pagamento. Entraremos em contacto em menos de 24 horas.
+              </p>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
-/* ── CABEÇALHO / NAVEGAÇÃO ──────────────────────────────────── */
+/* ── CABEÇALHO / NAVEGAÇÃO ─────────────────────── */
 export const Header = ({ openContactModal, mobileMenuOpen, setMobileMenuOpen, isScrolled }) => {
   const handleNavClick = () => setMobileMenuOpen(false);
 
@@ -271,7 +355,7 @@ export const Header = ({ openContactModal, mobileMenuOpen, setMobileMenuOpen, is
   );
 };
 
-/* ── RODAPÉ ──────────────────────────────────────────────────── */
+/* ── RODAPÉ ─────────────────────────────────── */
 export const Footer = () => (
   <footer className="py-12 border-t border-white/5 text-center">
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
