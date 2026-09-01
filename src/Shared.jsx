@@ -329,6 +329,7 @@ export const Header = ({ openContactModal, mobileMenuOpen, setMobileMenuOpen, is
             <Link to="/#services" className="hover:text-white transition-colors duration-300">Serviços</Link>
             <Link to="/portfolio" className="hover:text-white transition-colors duration-300">Portefólio</Link>
             <Link to="/testemunhos" className="hover:text-white transition-colors duration-300">Testemunhos</Link>
+            <a href="/apresentacao.html" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300">Apresentação</a>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -348,6 +349,7 @@ export const Header = ({ openContactModal, mobileMenuOpen, setMobileMenuOpen, is
           <Link to="/#services" onClick={handleNavClick} className="hover:text-white transition-colors">Serviços</Link>
           <Link to="/portfolio" onClick={handleNavClick} className="hover:text-white transition-colors">Portefólio</Link>
           <Link to="/testemunhos" onClick={handleNavClick} className="hover:text-white transition-colors">Testemunhos</Link>
+          <a href="/apresentacao.html" target="_blank" rel="noopener noreferrer" onClick={handleNavClick} className="hover:text-white transition-colors">Apresentação</a>
           <button onClick={openContactModal} className="text-left text-white mt-2 pb-2 border-b border-white/20">Começar Website</button>
         </div>
       )}
