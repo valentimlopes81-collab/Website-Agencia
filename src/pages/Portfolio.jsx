@@ -38,6 +38,7 @@ export default function Portfolio() {
                   <img
                     src={work.img}
                     alt={work.title}
+                    style={work.imgPos ? { objectPosition: work.imgPos } : undefined}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
